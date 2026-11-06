@@ -24,11 +24,11 @@ from typing import Any
 
 import pandas as pd
 
-from loe import store
-from loe.client import Client, Fatal, Reply
-from loe.config import Model, Strategy
-from loe.parse import choice_text, parse
-from loe.templates import Renderer
+from land_or_water import store
+from land_or_water.client import Client, Fatal, Reply
+from land_or_water.config import Model, Strategy
+from land_or_water.parse import choice_text, parse
+from land_or_water.templates import Renderer
 
 PROMPT_TOKENS = 61  # chat-formatted prompt, measured on the spec's tokenizers
 MAX_CONSECUTIVE_ERRORS = 25

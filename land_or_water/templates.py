@@ -17,8 +17,8 @@ from jinja2 import TemplateError
 from jinja2.ext import loopcontrols
 from jinja2.sandbox import ImmutableSandboxedEnvironment
 
-from loe.config import CACHE, Model
-from loe.prompts import question
+from land_or_water.config import CACHE, Model
+from land_or_water.prompts import question
 
 HF = "https://huggingface.co"
 Renderer = Callable[[float, float], str]

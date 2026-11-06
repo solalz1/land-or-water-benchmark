@@ -5,12 +5,12 @@ import json
 import numpy as np
 import pandas as pd
 
-from loe import config, figure, grid, hf
-from loe.client import Client
-from loe.fake import FakeOpenRouter
-from loe.parse import answers_first
-from loe.runner import Job, Runner
-from loe.score import leaderboard_md, score_run
+from land_or_water import config, figure, grid, hf
+from land_or_water.client import Client
+from land_or_water.fake import FakeOpenRouter
+from land_or_water.parse import answers_first
+from land_or_water.runner import Job, Runner
+from land_or_water.score import leaderboard_md, score_run
 
 CFG = config.load()
 
@@ -63,7 +63,7 @@ async def test_figures_and_dataset_from_a_fake_run(tmp_path):
     board = score_run(CFG, run)
     paths = figure.make(run)
     names = {p.name for p in paths}
-    assert names == {"stats.json", "land_on_earth.png", "ranking.png", "difficulty.png", "error_sources.png",
+    assert names == {"stats.json", "land_or_water.png", "ranking.png", "difficulty.png", "error_sources.png",
                      "knowledge_vs_bias.png"}
     assert all(p.stat().st_size > 5_000 for p in paths if p.suffix == ".png")
     stats = json.loads((run / "figures" / "stats.json").read_text())

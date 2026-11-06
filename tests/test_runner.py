@@ -2,10 +2,10 @@ import httpx
 import pandas as pd
 import pytest
 
-from loe import config, grid, store
-from loe.client import Client, Fatal
-from loe.fake import FakeOpenRouter
-from loe.runner import Job, Runner
+from land_or_water import config, grid, store
+from land_or_water.client import Client, Fatal
+from land_or_water.fake import FakeOpenRouter
+from land_or_water.runner import Job, Runner
 
 CFG = config.load()
 
@@ -41,7 +41,7 @@ async def test_runs_resumes_and_never_duplicates(tmp_path):
 
 
 async def test_new_strategy_asks_again_and_score_uses_it(tmp_path):
-    from loe.score import predictions
+    from land_or_water.score import predictions
 
     m = CFG.model("gpt-oss-20b")
     pts = points(40)
@@ -226,7 +226,7 @@ def test_pack_and_resume_from_packed_copy(tmp_path):
 
 
 def _render(m):
-    from loe.templates import generic_renderer
+    from land_or_water.templates import generic_renderer
 
     return generic_renderer(m.raw_prefill)
 

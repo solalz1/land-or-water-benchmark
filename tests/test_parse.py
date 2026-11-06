@@ -2,7 +2,7 @@ import math
 
 import pytest
 
-from loe.parse import from_text, norm, parse, positions, word_of
+from land_or_water.parse import from_text, norm, parse, positions, word_of
 
 
 def chat_choice(tokens, tops=None, content=None):

@@ -1,7 +1,7 @@
 """Figures and numbers of RESULTS.md: ranking, maps, where the errors are, knowledge against bias.
 
 `make figure` reads the leaderboard written by `make score` and every model's predictions, and
-writes results/<run>/figures/: land_on_earth.png (the whole story on one page), ranking.png,
+writes results/<run>/figures/: land_or_water.png (the whole story on one page), ranking.png,
 difficulty.png, error_sources.png, knowledge_vs_bias.png, and stats.json with every number that
 RESULTS.md quotes.
 
@@ -38,9 +38,9 @@ from matplotlib.patches import Patch  # noqa: E402
 from matplotlib.path import Path as Outline  # noqa: E402
 from matplotlib.ticker import FuncFormatter  # noqa: E402
 
-from loe import grid, store  # noqa: E402
-from loe.config import REPO_URL  # noqa: E402
-from loe.score import INDIRECT_FLAG, indirect_answers, predictions  # noqa: E402
+from land_or_water import grid, store  # noqa: E402
+from land_or_water.config import REPO_URL  # noqa: E402
+from land_or_water.score import INDIRECT_FLAG, indirect_answers, predictions  # noqa: E402
 
 AUTHOR = "Solal Zana"
 SURFACE = "#fcfcfb"
@@ -189,7 +189,7 @@ def model_stats(df: pd.DataFrame, reg: dict[str, np.ndarray]) -> dict[str, Any]:
 
 def pilot_check(run_dir: Path, key: str, df: pd.DataFrame) -> dict[str, Any] | None:
     """The pilot's estimate against the full run scored on the same points with the same estimator."""
-    from loe.pilot import area_estimate
+    from land_or_water.pilot import area_estimate
 
     path = run_dir.parent / "pilot" / "report.json"
     if not path.exists():
@@ -517,7 +517,7 @@ def poster(path: Path, stats: dict[str, Any], preds: dict[str, pd.DataFrame]) ->
         return inches / H
 
     fig = plt.figure(figsize=(16, H))
-    fig.text(0.045, 1 - up(0.3), "Land on Earth", fontsize=30, fontweight="bold", va="top")
+    fig.text(0.045, 1 - up(0.3), "Land or Water", fontsize=30, fontweight="bold", va="top")
     fig.text(0.045, 1 - up(0.95), f"What {n} open-weight models know about the world map: “Land or Water?” at "
              f"{stats['points']:,} points, one every 2°, with no image and no tools", fontsize=13, color=INK2, va="top")
     fig.text(0.955, 1 - up(0.3), f"{AUTHOR} · {_when(stats)}\n{REPO_URL.removeprefix('https://')}", fontsize=10,
@@ -636,7 +636,7 @@ def make(run_dir: Path) -> list[Path]:
     out.mkdir(parents=True, exist_ok=True)
     (out / "stats.json").write_text(json.dumps(_round(stats), indent=2, ensure_ascii=False) + "\n")
     paths = [
-        poster(out / "land_on_earth.png", stats, preds),
+        poster(out / "land_or_water.png", stats, preds),
         ranking(out / "ranking.png", stats),
         difficulty(out / "difficulty.png", stats, preds),
         error_sources(out / "error_sources.png", stats),

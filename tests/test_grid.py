@@ -1,7 +1,7 @@
 import numpy as np
 
-from loe import grid
-from loe.prompts import coords, question
+from land_or_water import grid
+from land_or_water.prompts import coords, question
 
 
 def test_grid_matches_the_tweet():

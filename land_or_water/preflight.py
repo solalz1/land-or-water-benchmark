@@ -19,7 +19,7 @@ the pilot could hide:
   OpenRouter credits under the credits left on the key;
 - time: each model's throughput, hence the run's duration.
 
-It writes results/pilot/preflight.md and preflight.json; `loe run` refuses to start while the
+It writes results/pilot/preflight.md and preflight.json; `land-or-water run` refuses to start while the
 verdict is not green, or when configs/models.yaml changed since the rehearsal.
 """
 
@@ -33,10 +33,10 @@ from typing import Any
 
 import pandas as pd
 
-from loe import grid, store
-from loe.client import Client
-from loe.config import CONFIG, CREDIT_FEE, EUR_PER_USD, Config, Model
-from loe.runner import Job, Runner
+from land_or_water import grid, store
+from land_or_water.client import Client
+from land_or_water.config import CONFIG, CREDIT_FEE, EUR_PER_USD, Config, Model
+from land_or_water.runner import Job, Runner
 
 FULL = 16_200
 N_POINTS = 300

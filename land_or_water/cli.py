@@ -1,4 +1,4 @@
-"""Command line: loe check | pilot | preflight | probe | run | score | figure | hf | pack | status | demo.
+"""Command line: land-or-water check | pilot | preflight | probe | run | score | figure | hf | pack | status | demo.
 
 Every command that can spend credits reads OPENROUTER_API_KEY from the environment; the key is
 never printed or written anywhere. `--fake` swaps OpenRouter for the in-process fake API and
@@ -14,9 +14,9 @@ import sys
 from dataclasses import replace
 from pathlib import Path
 
-from loe import config, grid, store
-from loe.client import Client, Fatal, api_key
-from loe.config import CREDIT_FEE, EUR_PER_USD, RESULTS, Config
+from land_or_water import config, grid, store
+from land_or_water.client import Client, Fatal, api_key
+from land_or_water.config import CREDIT_FEE, EUR_PER_USD, RESULTS, Config
 
 FULL = 16_200
 
@@ -27,7 +27,7 @@ def _out(args) -> Path:
 
 def _client(cfg: Config, fake: bool):
     if fake:
-        from loe.fake import FakeOpenRouter
+        from land_or_water.fake import FakeOpenRouter
 
         api = FakeOpenRouter(cfg)
         return Client(
@@ -41,7 +41,7 @@ def _client(cfg: Config, fake: bool):
 
 
 def _renderers(cfg: Config, models, fake: bool) -> dict:
-    from loe import templates
+    from land_or_water import templates
 
     out = {}
     for m in models:
@@ -52,7 +52,7 @@ def _renderers(cfg: Config, models, fake: bool) -> dict:
 
 
 async def _check(args, cfg: Config) -> int:
-    from loe import check
+    from land_or_water import check
 
     models = cfg.select(args.models)
     print("Lecture des fiches OpenRouter et des templates (gratuit)…")
@@ -65,7 +65,7 @@ async def _check(args, cfg: Config) -> int:
 
 
 async def _pilot(args, cfg: Config) -> int:
-    from loe import pilot
+    from land_or_water import pilot
 
     models = cfg.select(args.models)
     out_dir = _out(args) / "pilot"
@@ -87,7 +87,7 @@ async def _pilot(args, cfg: Config) -> int:
 
 
 def _jobs(cfg: Config, args, out: Path):
-    from loe.runner import Job
+    from land_or_water.runner import Job
 
     path = out / "pilot" / "strategies.json"
     chosen = json.loads(path.read_text()) if path.exists() else {}
@@ -106,7 +106,7 @@ def _jobs(cfg: Config, args, out: Path):
 
 
 async def _preflight(args, cfg: Config) -> int:
-    from loe import preflight
+    from land_or_water import preflight
 
     models = cfg.select(args.models)
     rend = await asyncio.to_thread(_renderers, cfg, models, args.fake)
@@ -125,8 +125,8 @@ async def _preflight(args, cfg: Config) -> int:
 
 
 async def _run(args, cfg: Config) -> int:
-    from loe import preflight
-    from loe.runner import Runner, write_meta
+    from land_or_water import preflight
+    from land_or_water.runner import Runner, write_meta
 
     out = _out(args)
     run_dir = out / args.run
@@ -156,7 +156,7 @@ async def _run(args, cfg: Config) -> int:
     if projected > 0.9 * args.budget:
         print(
             f"⚠ Le pilote projette {projected:.2f} $ pour ce run, proche du budget de {args.budget:.2f} $ : "
-            f"le run s'arrêtera au budget. Pour le relever : uv run python -m loe run --budget {projected * 1.2:.0f}"
+            f"le run s'arrêtera au budget. Pour le relever : uv run python -m land_or_water run --budget {projected * 1.2:.0f}"
         )
     async with _client(cfg, args.fake) as client:
         runner = Runner(
@@ -186,8 +186,8 @@ async def _run(args, cfg: Config) -> int:
 
 
 def _score(args, cfg: Config) -> int:
-    from loe.render import render_run
-    from loe.score import score_run
+    from land_or_water.render import render_run
+    from land_or_water.score import score_run
 
     run_dir = _out(args) / args.run
     board = score_run(cfg, run_dir)
@@ -202,7 +202,7 @@ def _score(args, cfg: Config) -> int:
 
 
 def _figure(args, cfg: Config) -> int:
-    from loe import figure
+    from land_or_water import figure
 
     run_dir = _out(args) / args.run
     try:
@@ -216,7 +216,7 @@ def _figure(args, cfg: Config) -> int:
 
 
 def _hf(args, cfg: Config) -> int:
-    from loe import hf
+    from land_or_water import hf
 
     out = config.ROOT / "hf"
     try:
@@ -231,7 +231,7 @@ def _hf(args, cfg: Config) -> int:
 
 
 async def _probe(args, cfg: Config) -> int:
-    from loe import probe, templates
+    from land_or_water import probe, templates
 
     model = cfg.model(args.model)
     strategies = [s.strip() for s in args.strategy.split(",") if s.strip()]
@@ -307,7 +307,7 @@ def _demo(args, cfg: Config) -> int:
 
 
 def parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="loe", description="Land on Earth — Land or Water? sur des modèles open-weight")
+    p = argparse.ArgumentParser(prog="land-or-water", description="Land or Water — Land or Water? sur des modèles open-weight")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     def common(s, run=True):

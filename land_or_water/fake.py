@@ -31,9 +31,9 @@ from typing import Any
 import httpx
 import numpy as np
 
-from loe import grid
-from loe.config import Config, Model
-from loe.prompts import coords
+from land_or_water import grid
+from land_or_water.config import Config, Model
+from land_or_water.prompts import coords
 
 
 def _h(*parts: Any) -> int:

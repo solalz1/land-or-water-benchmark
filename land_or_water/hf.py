@@ -16,8 +16,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from loe import grid, store
-from loe.config import GRID, HF_DATASET, REPO_URL, ROOT
+from land_or_water import grid, store
+from land_or_water.config import GRID, HF_DATASET, REPO_URL, ROOT
 
 LICENSE = "cc-by-4.0"
 PREDICTION_COLUMNS = ["model", "point_id", "lat", "lon", "truth", "truth_lakes", "pred", "p_land", "mass", "source",
@@ -25,7 +25,7 @@ PREDICTION_COLUMNS = ["model", "point_id", "lat", "lon", "truth", "truth_lakes",
 
 FRONT_MATTER = f"""---
 license: {LICENSE}
-pretty_name: Land on Earth
+pretty_name: Land or Water
 language:
 - en
 tags:
@@ -85,7 +85,7 @@ def card(results_md: str, run: str, rows: int) -> str:
     """The dataset card: metadata, RESULTS.md with links that work on the Hub, and a guide to the files
     after its summary (in place of the repo's own file list)."""
     body = results_md.split("\n## Files", 1)[0].rstrip() + "\n"
-    body = re.sub(r"\A# [^\n]*\n+", "# Land on Earth\n\n", body)
+    body = re.sub(r"\A# [^\n]*\n+", "# Land or Water\n\n", body)
     figures = f"results/{run}/figures/"
 
     def link(m: re.Match) -> str:

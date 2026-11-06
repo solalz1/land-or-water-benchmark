@@ -21,9 +21,9 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from loe import grid, store
-from loe.config import Config
-from loe.parse import answers_first
+from land_or_water import grid, store
+from land_or_water.config import Config
+from land_or_water.parse import answers_first
 
 INDIRECT_FLAG = 0.01  # share of indirect answers from which the leaderboard adds a note
 
@@ -157,7 +157,7 @@ def _pct(x: Any) -> str:
 def leaderboard_md(board: pd.DataFrame) -> str:
     base = board["always_water"].iloc[0]
     lines = [
-        "# Land on Earth — reproduction du tweet",
+        "# Land or Water — reproduction du tweet",
         "",
         f"Précision pondérée par la surface contre le masque terre à 1 km (GLOBE). "
         f"Répondre toujours « Water » donne {_pct(base)}. Skill = gain sur cette réponse constante. "

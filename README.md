@@ -1,8 +1,8 @@
-# Land on Earth
+# Land or Water
 
 **English** · [Français](#français)
 
-Can a language model draw the world map from memory? Land on Earth asks 24 open-weight models “Land or Water?” at 16,200 coordinates, one every 2°, with no image and no tools. It redraws each model's map from its answers and scores it against a 1 km land mask, weighted by area. It reproduces the “Land or Water?” eval shared by Andrej Karpathy.
+Can a language model draw the world map from memory? This benchmark asks 24 open-weight models “Land or Water?” at 16,200 coordinates, one every 2°, with no image and no tools. It redraws each model's map from its answers and scores it against a 1 km land mask, weighted by area. It reproduces the “Land or Water?” eval shared by Andrej Karpathy.
 
 ## English
 
@@ -11,8 +11,8 @@ Can a language model draw the world map from memory? Land on Earth asks 24 open-
 MiniMax M3 (88.8 %) and DeepSeek V4.1 Flash (88.5 %) are tied at the top; DeepSeek V4.1 Flash got there for $0.10. Eight of the 24 models do no better than always answering “Water” (71.0 %), mostly because they answer “Land” far too often.
 
 - **[RESULTS.md](RESULTS.md)**: the full analysis, the figures and how to read them.
-- **[The full figure](results/tweet/figures/land_on_earth.png)**: what the models see together, where they go wrong, and every model's map.
-- **[Hugging Face dataset](https://huggingface.co/datasets/solalzana/land-on-earth)**: every model's answer at every point, ready to load with `datasets`.
+- **[The full figure](results/tweet/figures/land_or_water.png)**: what the models see together, where they go wrong, and every model's map.
+- **[Hugging Face dataset](https://huggingface.co/datasets/solalzana/land-or-water)**: every model's answer at every point, ready to load with `datasets`.
 
 ![Ranking of the 24 models](results/tweet/figures/ranking.png)
 
@@ -67,8 +67,8 @@ You need macOS or Linux, [uv](https://docs.astral.sh/uv/) and an OpenRouter API 
 **1. Install**
 
 ```sh
-git clone https://github.com/solalz1/land-on-earth-benchmark.git
-cd land-on-earth-benchmark
+git clone https://github.com/solalz1/land-or-water-benchmark.git
+cd land-or-water-benchmark
 make setup
 ```
 
@@ -124,14 +124,14 @@ make run      # on macOS, caffeinate -i make run keeps the Mac awake
 | `make hf` | free | `hf/`, the Hugging Face dataset, to send with `hf upload <user>/<dataset> hf --repo-type=dataset` |
 | `make test` | free | automated tests, against the fake API |
 
-Useful options: `uv run python -m loe run --models qwen3.5-9b,gemma-4-31b` for a few models; `--budget 10` to cap the cost of the run, credits and provider keys included ($22 by default). `uv run python -m loe preflight` runs the dress rehearsal alone. `uv run python -m loe probe --model gpt-oss-20b --provider deepinfra,parasail --strategy raw` tries a model at providers other than the configured one, 8 points per try.
+Useful options: `uv run python -m land_or_water run --models qwen3.5-9b,gemma-4-31b` for a few models; `--budget 10` to cap the cost of the run, credits and provider keys included ($22 by default). `uv run python -m land_or_water preflight` runs the dress rehearsal alone. `uv run python -m land_or_water probe --model gpt-oss-20b --provider deepinfra,parasail --strategy raw` tries a model at providers other than the configured one, 8 points per try.
 
 ### Files
 
 ```text
 configs/models.yaml     the 24 models: OpenRouter id, provider, precision, price, strategies, pace, key
 data/grid.csv           the grid and the truth (make truth rebuilds it)
-loe/                    the code: OpenRouter client, pilot, run, scoring, maps, figures, fake API
+land_or_water/          the code: OpenRouter client, pilot, run, scoring, maps, figures, fake API
 scripts/build_truth.py  builds data/grid.csv
 tests/                  tests against the fake API
 results/pilot/          pilot report, chosen strategies, dress rehearsal, compressed raw answers
@@ -146,15 +146,15 @@ The code is under the MIT license. The dataset on Hugging Face is under CC BY 4.
 
 ## Français
 
-Un modèle de langage sait-il dessiner la carte du monde de mémoire ? Land on Earth pose « Land or Water? » à 24 modèles open-weight sur 16 200 coordonnées, une tous les 2°, sans image ni outil. Il redessine la carte de chaque modèle à partir de ses réponses et la note contre un masque terre à 1 km, pondéré par la surface. C'est une reproduction de l'éval « Land or Water? » relayée par Andrej Karpathy.
+Un modèle de langage sait-il dessiner la carte du monde de mémoire ? Ce benchmark pose « Land or Water? » à 24 modèles open-weight sur 16 200 coordonnées, une tous les 2°, sans image ni outil. Il redessine la carte de chaque modèle à partir de ses réponses et la note contre un masque terre à 1 km, pondéré par la surface. C'est une reproduction de l'éval « Land or Water? » relayée par Andrej Karpathy.
 
 ### Résultats
 
 MiniMax M3 (88,8 %) et DeepSeek V4.1 Flash (88,5 %) sont à égalité en tête ; DeepSeek V4.1 Flash y arrive pour 0,10 $. Huit modèles sur 24 ne font pas mieux que répondre toujours « Water » (71,0 %), surtout parce qu'ils répondent « Land » bien trop souvent.
 
 - **[RESULTS.md](RESULTS.md)** : l'analyse complète, les figures et comment les lire (en anglais).
-- **[La figure complète](results/tweet/figures/land_on_earth.png)** : ce que voient les modèles ensemble, où ils se trompent, et la carte de chaque modèle.
-- **[Le dataset sur Hugging Face](https://huggingface.co/datasets/solalzana/land-on-earth)** : la réponse de chaque modèle en chaque point, prête à charger avec `datasets`.
+- **[La figure complète](results/tweet/figures/land_or_water.png)** : ce que voient les modèles ensemble, où ils se trompent, et la carte de chaque modèle.
+- **[Le dataset sur Hugging Face](https://huggingface.co/datasets/solalzana/land-or-water)** : la réponse de chaque modèle en chaque point, prête à charger avec `datasets`.
 
 Le classement est la figure de la version anglaise, plus haut. Run du 6 octobre 2026 : 389 196 requêtes, 16,85 $, environ une heure et demie.
 
@@ -193,8 +193,8 @@ Il faut macOS ou Linux, [uv](https://docs.astral.sh/uv/) et une clé API OpenRou
 **1. Installer**
 
 ```sh
-git clone https://github.com/solalz1/land-on-earth-benchmark.git
-cd land-on-earth-benchmark
+git clone https://github.com/solalz1/land-or-water-benchmark.git
+cd land-or-water-benchmark
 make setup
 ```
 
@@ -242,14 +242,14 @@ make run      # sur macOS, caffeinate -i make run garde le Mac éveillé
 | `make hf` | gratuit | `hf/`, le dataset Hugging Face, à envoyer avec `hf upload <utilisateur>/<dataset> hf --repo-type=dataset` |
 | `make test` | gratuit | tests automatiques, contre la fausse API |
 
-Options utiles : `uv run python -m loe run --models qwen3.5-9b,gemma-4-31b` pour quelques modèles ; `--budget 10` pour plafonner le coût du run, crédits et clés fournisseurs compris (22 $ par défaut). `uv run python -m loe preflight` relance la répétition générale seule. `uv run python -m loe probe --model gpt-oss-20b --provider deepinfra,parasail --strategy raw` essaie un modèle chez d'autres fournisseurs que celui de la config, 8 points par essai.
+Options utiles : `uv run python -m land_or_water run --models qwen3.5-9b,gemma-4-31b` pour quelques modèles ; `--budget 10` pour plafonner le coût du run, crédits et clés fournisseurs compris (22 $ par défaut). `uv run python -m land_or_water preflight` relance la répétition générale seule. `uv run python -m land_or_water probe --model gpt-oss-20b --provider deepinfra,parasail --strategy raw` essaie un modèle chez d'autres fournisseurs que celui de la config, 8 points par essai.
 
 ### Fichiers
 
 ```text
 configs/models.yaml     les 24 modèles : identifiant OpenRouter, fournisseur, précision, prix, stratégies, rythme, clé
 data/grid.csv           la grille et la vérité terrain (make truth la reconstruit)
-loe/                    le code : client OpenRouter, pilote, run, scoring, cartes, figures, fausse API
+land_or_water/          le code : client OpenRouter, pilote, run, scoring, cartes, figures, fausse API
 scripts/build_truth.py  construction de data/grid.csv
 tests/                  tests contre la fausse API
 results/pilot/          rapport du pilote, stratégies retenues, répétition générale, réponses brutes compressées

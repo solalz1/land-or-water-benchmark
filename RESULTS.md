@@ -1,8 +1,8 @@
-# Land on Earth — results
+# Land or Water — results
 
 24 open-weight models were asked “Land or Water?” at 16,200 coordinates, with no image and no tools, and scored against a 1 km land mask. This reproduces the “Land or Water?” map eval shared by Andrej Karpathy. Run of 6 October 2026: 389,196 requests, $16.85 in total.
 
-![Land on Earth: the world as the models see it, where they go wrong, the ranking and every model's map](results/tweet/figures/land_on_earth.png)
+![Land or Water: the world as the models see it, where they go wrong, the ranking and every model's map](results/tweet/figures/land_or_water.png)
 
 **In short**
 
@@ -159,4 +159,4 @@ To run everything again from scratch, see the [README](README.md).
 | [`results/tweet/maps/`](results/tweet/maps/) | each model's map: answers, P(Land), errors, and `montage.png` |
 | [`results/tweet/predictions/`](results/tweet/predictions/) | each model's answer at each point |
 | [`results/tweet/raw/`](results/tweet/raw/) | every request and answer, compressed JSON lines |
-| [Hugging Face dataset](https://huggingface.co/datasets/solalzana/land-on-earth) | the same data, ready to load with `datasets`: predictions, leaderboard, grid, figures, raw answers |
+| [Hugging Face dataset](https://huggingface.co/datasets/solalzana/land-or-water) | the same data, ready to load with `datasets`: predictions, leaderboard, grid, figures, raw answers |

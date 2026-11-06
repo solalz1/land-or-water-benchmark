@@ -5,10 +5,10 @@ from dataclasses import replace
 
 import pytest
 
-from loe import config, grid, preflight, store
-from loe.client import Client
-from loe.fake import FakeOpenRouter
-from loe.runner import Job, Runner
+from land_or_water import config, grid, preflight, store
+from land_or_water.client import Client
+from land_or_water.fake import FakeOpenRouter
+from land_or_water.runner import Job, Runner
 
 CFG = config.load()
 

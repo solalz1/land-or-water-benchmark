@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from loe.score import metrics
+from land_or_water.score import metrics
 
 NAN = float("nan")
 

@@ -23,9 +23,9 @@ from typing import Any, Awaitable, Callable
 
 import httpx
 
-from loe.config import OPENROUTER, REPO_URL, Model, Strategy
-from loe.prompts import question
-from loe.templates import Renderer
+from land_or_water.config import OPENROUTER, REPO_URL, Model, Strategy
+from land_or_water.prompts import question
+from land_or_water.templates import Renderer
 
 RETRY_STATUS = {408, 409, 425, 429, 500, 502, 503, 504, 520, 522, 524, 529}
 FATAL_STATUS = {401: "clé API refusée", 402: "crédits OpenRouter épuisés"}
@@ -158,7 +158,7 @@ class Client:
             headers={
                 "Authorization": f"Bearer {key}",
                 "HTTP-Referer": REPO_URL,
-                "X-Title": "Land on Earth",
+                "X-Title": "Land or Water",
             },
         )
         self.max_attempts = max_attempts

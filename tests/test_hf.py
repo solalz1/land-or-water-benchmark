@@ -1,13 +1,13 @@
 """The Hugging Face dataset card."""
 
-from loe import hf
-from loe.config import HF_DATASET, REPO_URL
+from land_or_water import hf
+from land_or_water.config import HF_DATASET, REPO_URL
 
-RESULTS = """# Land on Earth — results
+RESULTS = """# Land or Water — results
 
 Intro, see [the config](configs/models.yaml) and [maps](results/tweet/maps/).
 
-![Poster](results/tweet/figures/land_on_earth.png)
+![Poster](results/tweet/figures/land_or_water.png)
 
 ## Setup
 
@@ -22,8 +22,8 @@ Text with [an anchor](#leaderboard) and [a site](https://example.com).
 def test_card_fixes_links_and_adds_the_dataset_section():
     card = hf.card(RESULTS, "tweet", 32_400)
     assert card.startswith("---\nlicense: cc-by-4.0\n")
-    assert "\n# Land on Earth\n\nIntro" in card and "— results" not in card
-    assert "](figures/land_on_earth.png)" in card
+    assert "\n# Land or Water\n\nIntro" in card and "— results" not in card
+    assert "](figures/land_or_water.png)" in card
     assert f"]({REPO_URL}/blob/main/configs/models.yaml)" in card
     assert f"]({REPO_URL}/tree/main/results/tweet/maps)" in card
     assert "](#leaderboard)" in card and "](https://example.com)" in card

@@ -1,4 +1,4 @@
-# Pilote Land on Earth
+# Pilote Land or Water
 
 24 modèles valides sur 24, 200 points chacun. Coût du pilote : 0.209 $. Projection pour le run complet (16 200 points) : 16.52 $, crédits OpenRouter et clés fournisseurs compris.
 

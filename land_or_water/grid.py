@@ -7,7 +7,7 @@ from functools import lru_cache
 import numpy as np
 import pandas as pd
 
-from loe.config import GRID
+from land_or_water.config import GRID
 
 N_ROWS, N_COLS = 90, 180  # 2-degree cells, north row first, from longitude -180
 

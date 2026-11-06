@@ -13,9 +13,9 @@ import re
 from pathlib import Path
 from typing import Any
 
-from loe.client import Client
-from loe.config import CREDIT_FEE, EUR_PER_USD, Config, Model
-from loe.runner import PROMPT_TOKENS
+from land_or_water.client import Client
+from land_or_water.config import CREDIT_FEE, EUR_PER_USD, Config, Model
+from land_or_water.runner import PROMPT_TOKENS
 
 FULL = 16_200
 

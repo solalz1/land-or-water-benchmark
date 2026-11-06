@@ -3,9 +3,9 @@ import json
 import httpx
 import pytest
 
-from loe import config
-from loe.client import Client, Fatal, api_key, request
-from loe.templates import generic_renderer, renderer_from
+from land_or_water import config
+from land_or_water.client import Client, Fatal, api_key, request
+from land_or_water.templates import generic_renderer, renderer_from
 
 CFG = config.load()
 
@@ -67,7 +67,7 @@ def test_top_logprobs_follow_the_model():
 async def test_rate_limiter_spaces_requests():
     import time
 
-    from loe.client import RateLimiter
+    from land_or_water.client import RateLimiter
 
     lim = RateLimiter(rpm=600)  # one request every 0.1 s
     t0 = time.monotonic()
@@ -255,7 +255,7 @@ async def test_empty_credits_still_stop_everything():
 
 
 def test_cost_counts_what_your_provider_key_billed():
-    from loe import store
+    from land_or_water import store
 
     openrouter = {"cost": 2e-5, "byok": False, "upstream_cost": 1.9e-5}
     mine = {"cost": 0.0, "byok": True, "upstream_cost": 3e-5}
@@ -268,7 +268,7 @@ def test_cost_counts_what_your_provider_key_billed():
 def test_open_files_limit_is_raised():
     import resource
 
-    from loe.cli import raise_open_files
+    from land_or_water.cli import raise_open_files
 
     raise_open_files()
     soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)

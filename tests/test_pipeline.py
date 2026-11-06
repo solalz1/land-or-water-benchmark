@@ -2,13 +2,13 @@
 
 import json
 
-from loe import check, config, grid, pilot
-from loe.client import Client
-from loe.fake import FakeOpenRouter, accuracy_of
-from loe.render import render_run
-from loe.runner import Job, Runner
-from loe.score import score_run
-from loe.templates import generic_renderer
+from land_or_water import check, config, grid, pilot
+from land_or_water.client import Client
+from land_or_water.fake import FakeOpenRouter, accuracy_of
+from land_or_water.render import render_run
+from land_or_water.runner import Job, Runner
+from land_or_water.score import score_run
+from land_or_water.templates import generic_renderer
 
 CFG = config.load()
 KEYS = [
@@ -102,7 +102,7 @@ async def test_pilot_picks_the_right_strategy_for_each_behaviour(tmp_path):
 
 
 async def test_probe_finds_a_provider_that_passes_raw_prompts(tmp_path):
-    from loe import probe
+    from land_or_water import probe
 
     m = CFG.model("gpt-oss-20b")
     fake = FakeOpenRouter(CFG, fail_rate=0)

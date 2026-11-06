@@ -1,8 +1,8 @@
-# Land on Earth — 24 open-weight models: 19 of the starting list (Mistral Large 3 left out, see
+# Land or Water — 24 open-weight models: 19 of the starting list (Mistral Large 3 left out, see
 # below) and Mistral's size ladder (5).
 #
 # Every request pins one provider through OpenRouter, forbids fallbacks and refuses any
-# provider that would ignore a parameter (see loe/client.py). Providers, precisions and prices
+# provider that would ignore a parameter (see land_or_water/client.py). Providers, precisions and prices
 # come from https://openrouter.ai/api/v1/models/<id>/endpoints, read on 6 October 2026;
 # `make check` re-reads them live before anything is spent.
 #

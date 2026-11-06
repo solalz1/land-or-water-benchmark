@@ -15,12 +15,12 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
-from loe import grid, store
-from loe.client import Client
-from loe.config import Config, Model
-from loe.pilot import PROBE, judge
-from loe.runner import Job, make_record
-from loe.templates import Renderer
+from land_or_water import grid, store
+from land_or_water.client import Client
+from land_or_water.config import Config, Model
+from land_or_water.pilot import PROBE, judge
+from land_or_water.runner import Job, make_record
+from land_or_water.templates import Renderer
 
 
 async def run_probe(

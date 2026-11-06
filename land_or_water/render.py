@@ -13,8 +13,8 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 from matplotlib.colors import ListedColormap  # noqa: E402
 
-from loe import grid  # noqa: E402
-from loe.score import predictions  # noqa: E402
+from land_or_water import grid  # noqa: E402
+from land_or_water.score import predictions  # noqa: E402
 
 EXTENT = (-180, 180, -90, 90)
 MISSING = 0.5  # grey where a model gave no usable answer

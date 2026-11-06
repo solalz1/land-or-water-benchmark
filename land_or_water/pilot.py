@@ -28,11 +28,11 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from loe import grid, store
-from loe.client import Client
-from loe.config import CREDIT_FEE, EUR_PER_USD, Config, Model, Strategy
-from loe.runner import Job, Runner, estimate, make_record, spent_in, write_meta
-from loe.templates import Renderer
+from land_or_water import grid, store
+from land_or_water.client import Client
+from land_or_water.config import CREDIT_FEE, EUR_PER_USD, Config, Model, Strategy
+from land_or_water.runner import Job, Runner, estimate, make_record, spent_in, write_meta
+from land_or_water.templates import Renderer
 
 PROBE = 8
 FULL = 16_200
@@ -262,7 +262,7 @@ async def run_pilot(
 
 def markdown(report: dict[str, Any]) -> str:
     lines = [
-        "# Pilote Land on Earth",
+        "# Pilote Land or Water",
         "",
         f"{report['valid']} modèles valides sur {report['total']}, {report['points']} points chacun. "
         f"Coût du pilote : {report['pilot_cost_usd']:.3f} $. "

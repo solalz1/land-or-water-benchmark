@@ -1,4 +1,4 @@
-# Land on Earth — reproduction du tweet
+# Land or Water — reproduction du tweet
 
 Précision pondérée par la surface contre le masque terre à 1 km (GLOBE). Répondre toujours « Water » donne 71.0 %. Skill = gain sur cette réponse constante. Réflexion « minimale » : le modèle ne peut pas répondre sans réfléchir, il réfléchit au minimum avant de répondre ; les autres répondent sans réflexion.
 
